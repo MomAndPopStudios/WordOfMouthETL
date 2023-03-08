@@ -14,7 +14,6 @@ def import_genres(engine, cursor):
             continue
         page_py = wiki_wiki.page(genre)
         summary = page_py.summary
-        print(genre, summary)
         genre_df = pd.DataFrame([[genre, summary]], columns=['genre', 'summary'])
         genres_df = pd.concat([genres_df, genre_df])
     cursor.execute('truncate table stage.genres')
