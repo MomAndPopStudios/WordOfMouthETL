@@ -1,4 +1,6 @@
 import json
+
+from console import import_platforms
 from genre import import_genres
 from sqlalchemy import create_engine
 
@@ -10,6 +12,7 @@ connection = engine.connect().connection
 cursor = connection.cursor()
 
 import_genres(engine, cursor)
+import_platforms(engine, cursor)
 
 cursor.close()
 connection.commit()
