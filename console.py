@@ -2,8 +2,7 @@ import wikipediaapi
 import pandas as pd
 
 
-def import_platforms(engine, cursor):
-    en_wiki = wikipediaapi.Wikipedia('en')
+def import_platforms(en_wiki, engine, cursor):
     ignored_platforms = [
         'Amiga arcade conversions', 'Android (operating system)', 'backward-compatible for Xbox One and Series X/S',
         'Famicom Disk System', 'games compatible with EyeToy', 'Lists of best-selling by platform', 'Lists of PC',

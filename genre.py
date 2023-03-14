@@ -3,16 +3,15 @@ import pandas as pd
 
 
 # Inserts List of video game genres from wikipedia
-def import_genres(engine, cursor):
-    wiki_wiki = wikipediaapi.Wikipedia('en')
-    page_py = wiki_wiki.page('Category:Video_game_genres')
+def import_genres(en_wiki, engine, cursor):
+    page_py = en_wiki.page('Category:Video_game_genres')
     genres = page_py.categorymembers
     ignored_genres = ['Video game genre', 'List of video game genres']
     genres_df = pd.DataFrame(columns=['genre', 'summary'])
     for genre in genres:
         if genre in ignored_genres:
             continue
-        page_py = wiki_wiki.page(genre)
+        page_py = en_wiki.page(genre)
         summary = page_py.summary
         genre = genre.replace('List of ', '')
         genre_df = pd.DataFrame([[genre, summary]], columns=['genre', 'summary'])

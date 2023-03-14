@@ -3,9 +3,8 @@ import pandas as pd
 
 
 # Inserts List of video game genres from wikipedia
-def import_publishers(engine, cursor):
-    wiki_wiki = wikipediaapi.Wikipedia('en')
-    page_py = wiki_wiki.page('Category:Video_game_publishers')
+def import_publishers(en_wiki, engine, cursor):
+    page_py = en_wiki.page('Category:Video_game_publishers')
     publishers = page_py.categorymembers
     ignored_publishers = ['Video game publishing brands', 'Video game publisher', 'List of video game publishers']
     publishers_df = pd.DataFrame(columns=['publisher'])
