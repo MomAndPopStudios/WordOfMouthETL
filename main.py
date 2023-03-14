@@ -3,6 +3,7 @@ import json
 from console import import_platforms
 from genre import import_genres
 from sqlalchemy import create_engine
+from publisher import import_publishers
 
 # Connect to mariadb
 connections = json.load(open('connections.json'))
@@ -13,6 +14,7 @@ cursor = connection.cursor()
 
 import_genres(engine, cursor)
 import_platforms(engine, cursor)
+import_publishers(engine, cursor)
 
 cursor.close()
 connection.commit()
