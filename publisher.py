@@ -7,7 +7,7 @@ def import_publishers(engine, cursor):
     wiki_wiki = wikipediaapi.Wikipedia('en')
     page_py = wiki_wiki.page('Category:Video_game_publishers')
     publishers = page_py.categorymembers
-    ignored_publishers = []
+    ignored_publishers = ['Video game publishing brands', 'Video game publisher', 'List of video game publishers']
     publishers_df = pd.DataFrame(columns=['publisher'])
     for publisher in publishers:
         publisher = publisher.replace('Category:', '')
