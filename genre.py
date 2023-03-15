@@ -1,4 +1,3 @@
-import wikipediaapi
 import pandas as pd
 
 

@@ -1,8 +1,6 @@
-import wikipediaapi
 import pandas as pd
 
 
-# Inserts List of video game genres from wikipedia
 def import_publishers(en_wiki, engine, cursor):
     page_py = en_wiki.page('Category:Video_game_publishers')
     publishers = page_py.categorymembers
