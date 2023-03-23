@@ -3,6 +3,7 @@ import yaml
 
 from console import import_platforms
 from developer import import_developers
+from game import import_games
 from genre import import_genres
 from sqlalchemy import create_engine
 from publisher import import_publishers
@@ -28,11 +29,11 @@ authorization_header = {"Authorization": f"Bearer {access_token}"}
 header.update(authorization_header)
 # en_wiki = wikipediaapi.Wikipedia('en', headers=header)
 en_wiki = wikipediaapi.Wikipedia('en')
-
-import_genres(en_wiki, engine, cursor)
-import_platforms(en_wiki, engine, cursor)
-import_publishers(en_wiki, engine, cursor)
-import_developers(en_wiki, engine, cursor)
+# import_genres(en_wiki, engine, cursor)
+# import_platforms(en_wiki, engine, cursor)
+# import_publishers(en_wiki, engine, cursor)
+# import_developers(en_wiki, engine, cursor)
+import_games(en_wiki, engine, cursor)
 
 cursor.close()
 connection.commit()
