@@ -20,6 +20,7 @@ db_port = db_config['port']
 database_url = f"mariadb+pymysql://{db_username}:{db_password}@{db_server}:{db_port}/word_of_mouth"
 engine = create_engine(database_url, echo=True)
 connection = engine.connect().connection
+raw_connection = engine.raw_connection()
 cursor = connection.cursor()
 
 api_config = config['wiki_api']
