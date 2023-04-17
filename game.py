@@ -33,9 +33,13 @@ def import_games(en_wiki, engine, cursor):
         wiki_url = 'https://en.wikipedia.org/wiki/' + game_list_url
         table_attributes = {'class': 'wikitable sortable'}
         try:
-            tables = pd.read_html(wiki_url, attrs=table_attributes)
+            tables = pd.read_html(wiki_url, attrs=table_attributes, flavor='bs4')
         except ValueError:
-            tables = pd.read_html(wiki_url)
+            try:
+                tables = pd.read_html(wiki_url, flavor='bs4')
+            except ValueError:
+                print('Error reading tables from ' + wiki_url)
+                # continue
         for table_df in tables:
             columns = table_df.columns
             has_game = 'Game' in columns
@@ -69,7 +73,7 @@ def import_games(en_wiki, engine, cursor):
 
         wiki_url = 'https://en.wikipedia.org/wiki/' + game_url
         try:
-            tables = pd.read_html(wiki_url, attrs={'class': 'infobox'})
+            tables = pd.read_html(wiki_url, attrs={'class': 'infobox'}, flavor='bs4')
         except:
             continue
         for game_info_df in tables:
@@ -148,6 +152,9 @@ def import_games(en_wiki, engine, cursor):
                 print("Platform for " + game_name + " not found")
                 continue
             platform_list = platform_df.iloc[0].values[1]
+            if not isinstance(platform_list, str):
+                print("Platform for " + game_name + " is not a string")
+                continue
             platform_list = platform_list.split(',')
             platform_list = [platform for platform in platform_list if ".mw" not in platform]
             for platform in platform_list:
